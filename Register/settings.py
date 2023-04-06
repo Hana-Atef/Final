@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'project',
     'crispy_forms',
     'crispy_bootstrap4',
+    'social_django',
     
 ]
 
@@ -70,6 +71,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -84,7 +88,7 @@ WSGI_APPLICATION = 'Register.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME'  : 'Try',
+        'NAME'  : 'Autisstic',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -111,6 +115,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -128,6 +139,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+
+
+SOCIAL_AUTH_GITHUB_KEY = 'YOUR GITHUB KEY'
+SOCIAL_AUTH_GITHUB_SECRET = 'YOUR GITHUB SECRET KEY'
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'YOUR GOOGLE KEY'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'YOUR GOOGLE SECRET KEY'
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
